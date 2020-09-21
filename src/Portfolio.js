@@ -1,10 +1,13 @@
-import React from "react";
+import React from 'react';
+import AssetList from './AssetList'
 
 export default function Portfolio( props ) {
-console.log(props);
+  console.log(props);
+
   const {
     portfolioName,
-    Description
+    description,
+    assets
   } = props
 
   return (
@@ -17,8 +20,14 @@ console.log(props);
         </div>
       </div>
       <div>
-        <span>{Description} </span>
-        <span>Dominate Tech Stocks</span>
+      <span>Portfolio Description: </span>
+        <span>{description} </span>
+      </div>
+      <div>
+        <span>Assets: </span>
+        <div>
+          <AssetList assets={assets} />
+        </div>
       </div>
     </div>
   );
