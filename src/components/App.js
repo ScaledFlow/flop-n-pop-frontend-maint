@@ -3,21 +3,25 @@ import PortfolioList from './PortfolioList'
 import '../css/app.css'
 import uuid from 'react-uuid'
 
-const LOCAL_STORAGE_KEY = 'portfolio'
+const LOCAL_STORAGE_KEY = 'flopnpop.portfolio'
 
 function App() {
+  // const [portfolios, setPortfolios] = useState(samplePortfolios);
   const [portfolios, setPortfolios] = useState(samplePortfolios);
 
-  // useEffect(() => {
-  //   console.log('Rendered x')
-  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(portfolio))
-  // }, [portfolio])
+  useEffect(() => {
+    console.log('Rendered get')
+    const portfolioJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
+    console.log(portfolioJSON);
+    if (portfolioJSON != null) setPortfolios(JSON.parse(portfolioJSON))
+    // console.log(portfolios);
+  }, [])
 
-  
-  // useEffect(() => {
-  //   console.log('Rendered x')
-  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(portfolio))
-  // }, [])
+  useEffect(() => {
+    console.log('Rendered set')
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(portfolios))
+    console.log(portfolios);
+  }, [portfolios])
 
   function handlePortfolioAdd() {
     const newPortfolio = {
@@ -43,9 +47,6 @@ function App() {
   function handlePortfolioDelete(id) {
     setPortfolios(portfolios.filter(portfolio => portfolio.id !== id ))
   }
-
-  // console.log(portfolio);
-
 
   return (
     <>

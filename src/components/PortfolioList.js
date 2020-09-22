@@ -9,10 +9,7 @@ export default function PortfolioList( props ) {
     handlePortfolioDelete
   } = props
 
-  // console.log(portfolios);
-  // console.log(handlePortfolioAdd);
-  // console.log(handlePortfolioDelete);
-
+  console.log(props.portfolios)
 
   return (
     <>

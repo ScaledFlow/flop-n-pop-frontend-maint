@@ -12,7 +12,7 @@ export default function Portfolio( props ) {
     handlePortfolioDelete
   } = props
 
-  console.log(props);
+  // console.log(props);
 
   return (
     <div className='portfolio'>
