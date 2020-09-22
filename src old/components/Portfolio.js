@@ -3,7 +3,6 @@ import AssetList from './AssetList'
 
 export default function Portfolio( props ) {
   
-
   const {
     id,
     portfolioName,
@@ -11,8 +10,6 @@ export default function Portfolio( props ) {
     assets,
     handlePortfolioDelete
   } = props
-
-  console.log(props);
 
   return (
     <div className='portfolio'>
@@ -22,8 +19,10 @@ export default function Portfolio( props ) {
           <button className='btn btn--primary mr-1'>Edit</button>
           <button 
             className='btn btn--danger'
-            onClick={() => handlePortfolioDelete(id)}>
-            Delete</button>
+            onClick={() => handlePortfolioDelete(id)}
+            >
+            Delete
+            </button>
         </div>
       </div>
       <div className='portfolio__row'>

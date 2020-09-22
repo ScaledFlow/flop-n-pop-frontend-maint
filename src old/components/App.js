@@ -6,7 +6,7 @@ import uuid from 'react-uuid'
 const LOCAL_STORAGE_KEY = 'portfolio'
 
 function App() {
-  const [portfolios, setPortfolios] = useState(samplePortfolios);
+  const [portfolio, setPortfolio] = useState(samplePortfolios);
 
   // useEffect(() => {
   //   console.log('Rendered x')
@@ -37,20 +37,21 @@ function App() {
         }
       ]
     }
-     setPortfolios([...portfolios, newPortfolio])
+     setPortfolio([...portfolio, newPortfolio])
   }
 
   function handlePortfolioDelete(id) {
-    setPortfolios(portfolios.filter(portfolio => portfolio.id !== id ))
+    setPortfolio(portfolio.filter(portfolio => portfolio.id !== id
+      ))
   }
 
-  // console.log(portfolio);
 
+  console.log(portfolio);
 
   return (
     <>
       <PortfolioList 
-      portfolios={portfolios} 
+      portfolios={portfolio} 
       handlePortfolioAdd={handlePortfolioAdd}
       handlePortfolioDelete={handlePortfolioDelete}
       />
