@@ -7,8 +7,11 @@ export default function AssetList({ assets }) {
     return <Asset key={asset.id} {...asset } />
   })
   return (
-    <div>
+    <>
+    <div className='asset-grid'>
       {assetElement}
     </div>
+  
+    </>
   )
 }

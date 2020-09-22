@@ -1,5 +1,6 @@
 import React from 'react';
 import PortfolioList from './PortfolioList'
+import '../css/app.css'
 
 function App() {
   return (
@@ -13,13 +14,13 @@ function App() {
 const samplePortfolios = [
   {
     id: 1,
-    portfolioName: 'Wonder X Stocks',
+    portfolioName: 'WONDER STOCKS',
     description: 'Dominate Tech Stocks',
     assets: [
       {
         id: 2,
         ticker: 'TSLA',
-        desc: 'Telsa'
+        desc: 'Tesla'
       },
       {
         id: 3,
@@ -30,7 +31,7 @@ const samplePortfolios = [
   },
   {
     id: 2,
-    portfolioName: 'Super X Stocks',
+    portfolioName: 'SUPER STOCKS',
     description: 'New Tech Stocks',
     assets: [
       {
@@ -41,7 +42,17 @@ const samplePortfolios = [
       {
         id: 4,
         ticker: 'GOOG',
-        desc: 'Alphabet Inc'
+        desc: 'Alphabet'
+      },
+      {
+        id: 5,
+        ticker: 'AMZN',
+        desc: 'Amazon'
+      },
+      {
+        id: 6,
+        ticker: 'NFLX',
+        desc: 'Netflix'
       }
     ]
   }
