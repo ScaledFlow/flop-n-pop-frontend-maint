@@ -1,9 +1,9 @@
 import React from 'react'
 import Portfolio from './Portfolio'
 
-export default function PortfolioList( { portfolios }) {
+export default function PortfolioList( { portfolios, handlePortfolioAdd }) {
   
-  // console.log(portfolios);
+  // 
   return (
     <>
     <div className="portfolio-list">
@@ -14,7 +14,9 @@ export default function PortfolioList( { portfolios }) {
         })}
       </div>
       <div className="portfolio-list__add-portfolio-btn-container">
-        <button className="btn btn--primary">Add Portfolio</button>
+        <button className="btn btn--primary"
+        onClick={handlePortfolioAdd}
+        >Add Portfolio</button>
       </div>
     </div>
       </>

@@ -2,7 +2,7 @@ import React from 'react';
 import AssetList from './AssetList'
 
 export default function Portfolio( props ) {
-  console.log(props);
+  
 
   const {
     portfolioName,

@@ -1,15 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PortfolioList from './PortfolioList'
 import '../css/app.css'
+import uuid from 'react-uuid'
+
+const LOCAL_STORAGE_KEY = 'portfolio'
 
 function App() {
+  const [portfolio, setPortfolio] = useState(samplePortfolios);
+
+  // useEffect(() => {
+  //   console.log('Rendered x')
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(portfolio))
+  // }, [portfolio])
+
+  
+  // useEffect(() => {
+  //   console.log('Rendered x')
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(portfolio))
+  // }, [])
+
+  function handlePortfolioAdd() {
+    const newPortfolio = {
+      id: uuid(),
+      portfolioName: 'New',
+      description: 'Test Desc',
+      assets: [
+        {
+          id:uuid(),
+          ticker: 'TSLA',
+          desc: 'Tesla'
+        },
+        {
+          id:uuid(),
+          ticker: 'APPL',
+          desc: 'Apple'
+        }
+      ]
+    }
+     setPortfolio([...portfolio, newPortfolio])
+  }
+
+  console.log(portfolio);
+
+
   return (
     <>
-      <PortfolioList portfolios={samplePortfolios} />
-      
+      <PortfolioList 
+      portfolios={portfolio} 
+      handlePortfolioAdd={handlePortfolioAdd}/>
     </>
   );
 }
+
 
 const samplePortfolios = [
   {
