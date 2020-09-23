@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PortfolioList from './PortfolioList'
+import PortfolioEdit from './PortfolioEdit'
 import '../css/app.css'
 import uuid from 'react-uuid'
 
@@ -65,6 +66,7 @@ function App() {
           // handlePortfolioAdd={handlePortfolioAdd}
           // handlePortfolioDelete={handlePortfolioDelete}
         />
+        <PortfolioEdit/>
       </PortfolioContext.Provider>
     </>
   );

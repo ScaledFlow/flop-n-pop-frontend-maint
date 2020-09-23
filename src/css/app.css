@@ -4,11 +4,13 @@
 @import 'portfolio-list.css';
 @import 'portfolio.css';
 @import 'asset.css';
+@import 'portfolio-edit.css';
 
 *, *::before, *::after {
   font-family: "Lucida Console", Courier, monospace;
   font-weight: 200;
   font-style: light;
+  box-sizing: border-box;
 }
 
 html {

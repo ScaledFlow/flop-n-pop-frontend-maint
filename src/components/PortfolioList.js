@@ -16,7 +16,7 @@ export default function PortfolioList( props ) {
     // handlePortfolioDelete
   } = props
 
-  // console.log(props.portfolios)
+  console.log(portfolios)
 
 
   return (
