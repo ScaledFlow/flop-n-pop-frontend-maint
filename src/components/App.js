@@ -9,29 +9,36 @@ export const PortfolioContext = React.createContext();
 const LOCAL_STORAGE_KEY = 'flopnpop.portfolio'
 
 function App() {
-  // const [portfolios, setPortfolios] = useState(samplePortfolios);
+  const [selectedPortfolioId, setSelectedPortfolioID ] = useState();
   const [portfolios, setPortfolios] = useState(samplePortfolios);
 
+  const selectedPortfolio = 
+  portfolios.find(portfolio => portfolio.id === selectedPortfolioId)
+  console.log(selectedPortfolio);
+  
   const PortfolioContextValue = {
     handlePortfolioAdd: handlePortfolioAdd,
-    handlePortfolioDelete: handlePortfolioDelete
+    handlePortfolioDelete: handlePortfolioDelete,
+    handlePortfolioSelect: handlePortfolioSelect
   }
 
-  // console.log(PortfolioContextValue)
-  
   useEffect(() => {
-    console.log('Rendered get')
+    // 
     const portfolioJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
-    console.log(portfolioJSON);
+    // 
     if (portfolioJSON != null) setPortfolios(JSON.parse(portfolioJSON))
-    // console.log(portfolios);
+    // 
   }, [])
 
   useEffect(() => {
-    console.log('Rendered set')
+    // 
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(portfolios))
-    console.log(portfolios);
+    // 
   }, [portfolios])
+  
+  function handlePortfolioSelect(id) {
+    setSelectedPortfolioID(id)
+  }
 
   function handlePortfolioAdd() {
     const newPortfolio = {
@@ -61,17 +68,13 @@ function App() {
   return (
     <>
       <PortfolioContext.Provider value={PortfolioContextValue}>
-        <PortfolioList 
-          portfolios={portfolios} 
-          // handlePortfolioAdd={handlePortfolioAdd}
-          // handlePortfolioDelete={handlePortfolioDelete}
-        />
-        <PortfolioEdit/>
+        <PortfolioList portfolios={portfolios} />
+        {/* <PortfolioEdit selectedPortfolio={selectedPortfolio}/> */}
+        {selectedPortfolio && <PortfolioEdit portfolio={selectedPortfolio}/>}
       </PortfolioContext.Provider>
     </>
   );
 }
-
 
 const samplePortfolios = [
   {

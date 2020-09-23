@@ -6,18 +6,9 @@ export default function PortfolioList( props ) {
   const { handlePortfolioAdd } = useContext(PortfolioContext)
   // const { handlePortfolioDelete } = useContext(PortfolioContext)
 
-  // console.log(portfolios);
-  // console.log(handlePortfolioAdd)
-  // console.log(handlePortfolioDelete);
-
   const {
     portfolios
-    // handlePortfolioAdd,
-    // handlePortfolioDelete
   } = props
-
-  console.log(portfolios)
-
 
   return (
     <>

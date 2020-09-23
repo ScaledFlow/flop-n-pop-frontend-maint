@@ -1,7 +1,10 @@
 import React from 'react'
 import AssetEdit from './AssetEdit'
 
-export default function PortfolioEdit() {
+export default function PortfolioEdit( { portfolio } ) {
+
+  console.log(portfolio.portfolioName);
+
   return (
     <div className="portfolio-edit">
       <div className="portfolio-edit__remove-button-container">
@@ -16,6 +19,7 @@ export default function PortfolioEdit() {
         <input type="text" 
           name="name" 
           id="name" 
+          value={portfolio.portfolioName}
           className="portfolio-edit__input"  />
         <label htmlFor="description" 
           className="portfolio-edit__label">
@@ -23,7 +27,8 @@ export default function PortfolioEdit() {
         <textarea 
           name="description" 
           className="portfolio-edit__input"
-          id="description" />
+          id="description"
+          value={portfolio.description} />
       </div>
       <br/>
       <label  className="portfolio-edit__label" >Assets</label>
@@ -31,9 +36,14 @@ export default function PortfolioEdit() {
         <div>Symbol</div>
         <div>Company Name</div>
         <div></div>
-        <AssetEdit />
-        <AssetEdit />
-        {/* asset component */}
+        {portfolio.assets.map(asset => (
+           <AssetEdit 
+           key={asset.id} 
+           asset={asset}
+          />
+        ))}
+        {/* <AssetEdit />
+        <AssetEdit /> */}
       </div>
       <div className="portfolio-edit__add-asset-btn-container">
         <button className="btn btn--primary">Add Asset</button>

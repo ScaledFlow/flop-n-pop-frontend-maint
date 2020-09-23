@@ -4,7 +4,7 @@ import { PortfolioContext } from './App'
 
 
 export default function Portfolio( props ) {
-    const { handlePortfolioDelete } = useContext(PortfolioContext)
+  const { handlePortfolioDelete, handlePortfolioSelect } = useContext(PortfolioContext)
 
   const {
     id,
@@ -13,14 +13,16 @@ export default function Portfolio( props ) {
     assets
   } = props
 
-  // console.log(props);
-
   return (
     <div className='portfolio'>
       <div className='portfolio__header'>
        <h3 className='portfolio__title'>{portfolioName}</h3>
         <div>
-          <button className='btn btn--primary mr-1'>Edit</button>
+          <button 
+          className='btn btn--primary mr-1'
+          onClick={() => handlePortfolioSelect(id)}
+          >
+            Edit</button>
           <button 
             className='btn btn--danger'
             onClick={() => handlePortfolioDelete(id)}>
@@ -32,8 +34,6 @@ export default function Portfolio( props ) {
         <span className='portfolio__value'>{description} </span>
       </div>
       <div>
-        {/* <span>Assets: </span> */}
-      
         <div className='portfolio__row'>
           <AssetList assets={assets} />
         </div>
