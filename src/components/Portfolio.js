@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useContext } from 'react';
 import AssetList from './AssetList'
+import { PortfolioContext } from './App'
+
 
 export default function Portfolio( props ) {
-  
+    const { handlePortfolioDelete } = useContext(PortfolioContext)
 
   const {
     id,
     portfolioName,
     description,
-    assets,
-    handlePortfolioDelete
+    assets
   } = props
 
   // console.log(props);

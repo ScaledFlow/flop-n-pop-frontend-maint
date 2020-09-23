@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Portfolio from './Portfolio'
+import { PortfolioContext } from './App'
 
 export default function PortfolioList( props ) {
+  const { handlePortfolioAdd } = useContext(PortfolioContext)
+  // const { handlePortfolioDelete } = useContext(PortfolioContext)
+
+  // console.log(portfolios);
+  // console.log(handlePortfolioAdd)
+  // console.log(handlePortfolioDelete);
 
   const {
-    portfolios,
-    handlePortfolioAdd,
-    handlePortfolioDelete
+    portfolios
+    // handlePortfolioAdd,
+    // handlePortfolioDelete
   } = props
 
-  console.log(props.portfolios)
+  // console.log(props.portfolios)
+
 
   return (
     <>
@@ -18,7 +26,6 @@ export default function PortfolioList( props ) {
         {portfolios.map(portfolio => {
           return <Portfolio 
           key={portfolio.id} 
-          handlePortfolioDelete={handlePortfolioDelete}
           {...portfolio}
           />
         })}

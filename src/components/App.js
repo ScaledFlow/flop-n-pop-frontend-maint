@@ -3,12 +3,21 @@ import PortfolioList from './PortfolioList'
 import '../css/app.css'
 import uuid from 'react-uuid'
 
+export const PortfolioContext = React.createContext();
+
 const LOCAL_STORAGE_KEY = 'flopnpop.portfolio'
 
 function App() {
   // const [portfolios, setPortfolios] = useState(samplePortfolios);
   const [portfolios, setPortfolios] = useState(samplePortfolios);
 
+  const PortfolioContextValue = {
+    handlePortfolioAdd: handlePortfolioAdd,
+    handlePortfolioDelete: handlePortfolioDelete
+  }
+
+  // console.log(PortfolioContextValue)
+  
   useEffect(() => {
     console.log('Rendered get')
     const portfolioJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -50,11 +59,13 @@ function App() {
 
   return (
     <>
-      <PortfolioList 
-      portfolios={portfolios} 
-      handlePortfolioAdd={handlePortfolioAdd}
-      handlePortfolioDelete={handlePortfolioDelete}
-      />
+      <PortfolioContext.Provider value={PortfolioContextValue}>
+        <PortfolioList 
+          portfolios={portfolios} 
+          // handlePortfolioAdd={handlePortfolioAdd}
+          // handlePortfolioDelete={handlePortfolioDelete}
+        />
+      </PortfolioContext.Provider>
     </>
   );
 }
