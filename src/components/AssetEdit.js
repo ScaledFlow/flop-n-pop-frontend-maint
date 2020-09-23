@@ -3,9 +3,9 @@ import React from 'react'
 export default function AssetEdit() {
   return (
     <>
-      <input></input>
-      <input></input>
-      <button>&times;</button>
+      <input type="text"  className="portfolio-edit__input" />
+      <input type="text" className="portfolio-edit__input" />
+      <button className="btn btn--danger">&times;</button>
     </>
   )
 }
