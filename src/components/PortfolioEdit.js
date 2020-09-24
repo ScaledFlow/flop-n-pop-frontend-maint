@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import AssetEdit from './AssetEdit'
 import { PortfolioContext } from './App'
+import uuid from 'react-uuid'
 
 export default function PortfolioEdit( { portfolio } ) {
-  const { handlePortfolioChange } = useContext(PortfolioContext)
-  // console.log(handlePortfolioChange);
+  const { handlePortfolioChange, handlePortfolioSelect } = useContext(PortfolioContext)
+  // 
   
 
   function handleChange(changes) {
@@ -17,11 +18,31 @@ export default function PortfolioEdit( { portfolio } ) {
     newAssets[index] = asset
     handleChange({ assets: newAssets})
   }
+
+  function handleAssetAdd() {
+    
+    const newAsset = {
+      id: uuid(),
+      ticker: '',
+      desc: ''
+    }
+    handleChange({ assets: [...portfolio.assets, newAsset] })
+  }  
+
+  function handleAssetDelete(id) {
+    handleChange({
+      assets: portfolio.assets.filter(a => a.id !== id)
+    })
+     
+  }
   
   return (
     <div className="portfolio-edit">
       <div className="portfolio-edit__remove-button-container">
-        <button className="btn portfolio-edit__remove-button">
+        <button 
+          className="btn portfolio-edit__remove-button"
+          onClick={() => handlePortfolioSelect(undefined)}
+          >
           &times;
         </button>
       </div>
@@ -32,7 +53,7 @@ export default function PortfolioEdit( { portfolio } ) {
         <input type="text" 
           name="name" 
           id="name" 
-          onInput={e => handleChange({ portfolioName: (e.target.value).toUpperCase() })}
+          onChange={e => handleChange({ portfolioName: (e.target.value).toUpperCase() })}
           value={portfolio.portfolioName}
           className="portfolio-edit__input"  />
         <label htmlFor="description" 
@@ -42,7 +63,7 @@ export default function PortfolioEdit( { portfolio } ) {
           name="description" 
           className="portfolio-edit__input"
           id="description"
-          onInput={e => handleChange({ description: e.target.value })}
+          onChange={e => handleChange({ description: e.target.value })}
           value={portfolio.description} />
       </div>
       <br/>
@@ -55,14 +76,18 @@ export default function PortfolioEdit( { portfolio } ) {
            <AssetEdit 
            key={asset.id} 
            handleAssetChange={handleAssetChange}
+           handleAssetDelete={handleAssetDelete}
            asset={asset}
           />
         ))}
-        {/* <AssetEdit />
-        <AssetEdit /> */}
       </div>
       <div className="portfolio-edit__add-asset-btn-container">
-        <button className="btn btn--primary">Add Asset</button>
+        <button 
+        className="btn btn--primary"
+        onClick={() => handleAssetAdd()}
+        >
+          Add Asset
+        </button>
       </div>
     </div>
   )

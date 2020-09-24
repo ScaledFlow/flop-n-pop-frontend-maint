@@ -14,10 +14,7 @@ function App() {
 
   const selectedPortfolio = 
   portfolios.find(portfolio => portfolio.id === selectedPortfolioId)
-  // console.log(selectedPortfolio);
-    // console.log(selectedPortfolioId);
-
-  
+ 
   const PortfolioContextValue = {
     handlePortfolioAdd: handlePortfolioAdd,
     handlePortfolioDelete: handlePortfolioDelete,
@@ -26,25 +23,15 @@ function App() {
   }
 
   useEffect(() => {
-    // 
     const portfolioJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
-    // 
     if (portfolioJSON != null) setPortfolios(JSON.parse(portfolioJSON))
-    // 
   }, [])
 
   useEffect(() => {
-    // 
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(portfolios))
-    // 
   }, [portfolios])
 
-  // console.log([...portfolios]);
-  // console.log(portfolios);
-
   function handlePortfolioChange(id, portfolio) {
-    console.log(id);
-    console.log(portfolio);
     const newPortfolios = [...portfolios]
     const index = newPortfolios.findIndex(p => p.id === id)
     newPortfolios[index] = portfolio
@@ -56,27 +43,44 @@ function App() {
   }
 
   function handlePortfolioAdd() {
+    // const newPortfolio = {
+    //   id: uuid(),
+    //   portfolioName: 'New',
+    //   description: 'Test Desc',
+    //   assets: [
+    //     {
+    //       id:uuid(),
+    //       ticker: 'TSLA',
+    //       desc: 'Tesla'
+    //     },
+    //     {
+    //       id:uuid(),
+    //       ticker: 'APPL',
+    //       desc: 'Apple'
+    //     }
+    //   ]
+    // }
+
     const newPortfolio = {
       id: uuid(),
-      portfolioName: 'New',
-      description: 'Test Desc',
+      portfolioName: '',
+      description: '',
       assets: [
         {
           id:uuid(),
-          ticker: 'TSLA',
-          desc: 'Tesla'
-        },
-        {
-          id:uuid(),
-          ticker: 'APPL',
-          desc: 'Apple'
+          ticker: '',
+          desc: ''
         }
       ]
     }
-     setPortfolios([...portfolios, newPortfolio])
+      setSelectedPortfolioID(newPortfolio.id)
+      setPortfolios([...portfolios, newPortfolio])
   }
 
   function handlePortfolioDelete(id) {
+    if (selectedPortfolioId != null && selectedPortfolioId === id) {
+      setSelectedPortfolioID(undefined);
+    }
     setPortfolios(portfolios.filter(portfolio => portfolio.id !== id ))
   }
 

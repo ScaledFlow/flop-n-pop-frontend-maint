@@ -3,7 +3,8 @@ import React from 'react'
 export default function AssetEdit( props ) {
   const {
     asset,
-    handleAssetChange
+    handleAssetChange,
+    handleAssetDelete
   } = props;
 
   function handleChange(changes) {
@@ -15,16 +16,21 @@ export default function AssetEdit( props ) {
       <input 
         type="text"
         className="portfolio-edit__input"
-        onInput={(e) => handleChange({ ticker: (e.target.value).toUpperCase() })}
+        onChange={(e) => handleChange({ ticker: (e.target.value).toUpperCase() })}
         value={asset.ticker}
       />
       <input 
         type="text" 
         className="portfolio-edit__input"
-        onInput={(e) => handleChange({  desc: e.target.value })}
+        onChange={(e) => handleChange({  desc: e.target.value })}
         value={asset.desc}
       />
-      <button className="btn btn--danger">&times;</button>
+      <button 
+      className="btn btn--danger"
+      onClick={() => handleAssetDelete(asset.id)}
+      >
+        &times;
+      </button>
     </>
   )
 }
