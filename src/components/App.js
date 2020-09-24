@@ -14,12 +14,15 @@ function App() {
 
   const selectedPortfolio = 
   portfolios.find(portfolio => portfolio.id === selectedPortfolioId)
-  console.log(selectedPortfolio);
+  // console.log(selectedPortfolio);
+    // console.log(selectedPortfolioId);
+
   
   const PortfolioContextValue = {
     handlePortfolioAdd: handlePortfolioAdd,
     handlePortfolioDelete: handlePortfolioDelete,
-    handlePortfolioSelect: handlePortfolioSelect
+    handlePortfolioSelect: handlePortfolioSelect,
+    handlePortfolioChange: handlePortfolioChange
   }
 
   useEffect(() => {
@@ -35,6 +38,18 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(portfolios))
     // 
   }, [portfolios])
+
+  // console.log([...portfolios]);
+  // console.log(portfolios);
+
+  function handlePortfolioChange(id, portfolio) {
+    console.log(id);
+    console.log(portfolio);
+    const newPortfolios = [...portfolios]
+    const index = newPortfolios.findIndex(p => p.id === id)
+    newPortfolios[index] = portfolio
+    setPortfolios(newPortfolios)
+  }
   
   function handlePortfolioSelect(id) {
     setSelectedPortfolioID(id)
@@ -69,7 +84,6 @@ function App() {
     <>
       <PortfolioContext.Provider value={PortfolioContextValue}>
         <PortfolioList portfolios={portfolios} />
-        {/* <PortfolioEdit selectedPortfolio={selectedPortfolio}/> */}
         {selectedPortfolio && <PortfolioEdit portfolio={selectedPortfolio}/>}
       </PortfolioContext.Provider>
     </>

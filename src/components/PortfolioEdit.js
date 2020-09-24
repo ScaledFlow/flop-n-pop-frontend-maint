@@ -1,10 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import AssetEdit from './AssetEdit'
+import { PortfolioContext } from './App'
 
 export default function PortfolioEdit( { portfolio } ) {
+  const { handlePortfolioChange } = useContext(PortfolioContext)
+  // console.log(handlePortfolioChange);
+  
 
-  console.log(portfolio.portfolioName);
+  function handleChange(changes) {
+    handlePortfolioChange(portfolio.id, { ...portfolio, ...changes })
+  }
 
+  function handleAssetChange(id, asset) {
+    const newAssets = [...portfolio.assets]
+    const index = newAssets.findIndex(i => i.id === id)
+    newAssets[index] = asset
+    handleChange({ assets: newAssets})
+  }
+  
   return (
     <div className="portfolio-edit">
       <div className="portfolio-edit__remove-button-container">
@@ -19,6 +32,7 @@ export default function PortfolioEdit( { portfolio } ) {
         <input type="text" 
           name="name" 
           id="name" 
+          onInput={e => handleChange({ portfolioName: (e.target.value).toUpperCase() })}
           value={portfolio.portfolioName}
           className="portfolio-edit__input"  />
         <label htmlFor="description" 
@@ -28,6 +42,7 @@ export default function PortfolioEdit( { portfolio } ) {
           name="description" 
           className="portfolio-edit__input"
           id="description"
+          onInput={e => handleChange({ description: e.target.value })}
           value={portfolio.description} />
       </div>
       <br/>
@@ -39,6 +54,7 @@ export default function PortfolioEdit( { portfolio } ) {
         {portfolio.assets.map(asset => (
            <AssetEdit 
            key={asset.id} 
+           handleAssetChange={handleAssetChange}
            asset={asset}
           />
         ))}
